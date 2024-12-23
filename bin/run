@@ -14,6 +14,12 @@ run_server() {
   npx quartz build --serve
 }
 
+run_sync() {
+  export BRAIN_VAULT="~/Documents/brain/notes"
+  export BRAIN_PUBLIC_VAULT="~/projects/node/brain-public/content"
+  node utils/content-sync/index.js 
+}
+
 fn_exists() { declare -F "$1" >/dev/null; }
 
 run() {
@@ -28,5 +34,6 @@ run() {
     eval $cmd "${@}"
   fi
 }
+
 
 run ${@}
