@@ -11,7 +11,7 @@ const config: QuartzConfig = {
   configuration: {
     pageTitle: "🧠",
     pageTitleSuffix: " | 🧠",
-    enableSPA: true,
+    enableSPA: false,
     enablePopovers: true,
     analytics: {
       provider: "google",
@@ -75,7 +75,7 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      RemoveTags({ tags: ["publish", "index"] }),
+      RemoveTags({ tags: ["publish"] }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
