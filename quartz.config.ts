@@ -1,6 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { RemovePublishTag } from "./quartz-custom/plugins/transformers/removePublishTag"
+import { RemoveTags } from "./quartz-custom/plugins/transformers/removeTags"
 
 /**
  * Quartz 4.0 Configuration
@@ -75,7 +75,7 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      RemovePublishTag(),
+      RemoveTags({ tags: ["publish", "index"] }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [

@@ -10,8 +10,8 @@ run_serve() {
   npx quartz create
 }
 
-run_server() {
-  npx quartz build --serve
+run_build() {
+  npx quartz build
 }
 
 run_sync() {

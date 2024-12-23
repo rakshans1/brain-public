@@ -1,14 +1,19 @@
 import { QuartzTransformerPlugin } from "../../../quartz/plugins/types"
 
-export const RemovePublishTag: QuartzTransformerPlugin = () => {
+
+interface RemoveTagsOptions {
+  tags: string[]
+}
+
+export const RemoveTags: QuartzTransformerPlugin<RemoveTagsOptions> = (options) => {
   return {
-    name: "RemovePublishTag",
+    name: "RemoveTags",
     markdownPlugins() {
       return [
         () => {
           return (_tree, file) => {
             if (file.data.frontmatter && file.data.frontmatter.tags) {
-              file.data.frontmatter.tags = file.data.frontmatter.tags.filter(tag => tag !== 'publish')
+              file.data.frontmatter.tags = file.data.frontmatter.tags.filter(tag => !options?.tags.includes(tag))
             }
           }
         },
