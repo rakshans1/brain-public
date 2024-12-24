@@ -1,6 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import { indexFilter } from "./quartz-custom/utils/filter"
+import { notesFilter } from "./quartz-custom/utils/filter"
+import { topicFilter } from "./quartz-custom/utils/filter"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -31,13 +32,13 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer({ title: "Topics" })),
+    Component.DesktopOnly(Component.Explorer({ title: "Topics", filterFn: topicFilter })),
   ],
   right: [
     Component.DesktopOnly(Component.Graph()),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
-    Component.RecentNotes({ limit: 5, showTags: false, filter: indexFilter })
+    Component.RecentNotes({ limit: 5, showTags: false, filter: notesFilter })
   ],
 }
 
@@ -49,7 +50,7 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer({ title: "Topics" })),
+    Component.DesktopOnly(Component.Explorer({ title: "Topics", filterFn: topicFilter })),
   ],
   right: [],
 }
