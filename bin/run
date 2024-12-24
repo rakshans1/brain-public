@@ -20,6 +20,18 @@ run_sync() {
   node utils/content-sync/index.js 
 }
 
+run_publish() {
+  cd content && git add . && git commit -m "Update" && git push
+  cd ..
+  git add . && git commit -m "Update content" && git push
+}
+
+run_deploy() {
+  run sync
+  run build
+  run publish
+}
+
 fn_exists() { declare -F "$1" >/dev/null; }
 
 run() {
