@@ -3,7 +3,7 @@ import { QuartzPluginData } from "../../quartz/plugins/vfile";
 
 export const notesFilterForIndex = (file: QuartzPluginData) => {
   if (file.frontmatter && file.frontmatter["disable-index"]) {
-    return file.frontmatter["disable-index"] !== 'true'
+    return file.frontmatter["disable-index"] !== true
   }
   return true;
 }
