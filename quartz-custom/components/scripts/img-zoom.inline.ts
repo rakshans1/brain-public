@@ -15,11 +15,6 @@ function setupZoom() {
       zoomedImg.src = (img as HTMLImageElement).src
       zoomedImg.className = 'zoomed-image'
 
-      // Add close functionality
-      overlay.addEventListener('click', () => {
-        document.body.removeChild(overlay)
-      })
-
       // Add elements to DOM
       overlay.appendChild(zoomedImg)
       document.body.appendChild(overlay)
@@ -28,11 +23,7 @@ function setupZoom() {
         document.body.removeChild(overlay)
       })
     })
-
-    // Add visual indicator that image is zoomable
-    img.style.cursor = 'zoom-in'
   })
 }
 
-document.addEventListener('nav', setupZoom)
 window.addEventListener('DOMContentLoaded', setupZoom)
