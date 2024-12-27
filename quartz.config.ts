@@ -1,6 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { RemoveTags } from "./quartz-custom/plugins/transformers/removeTags"
+import * as CustomPlugins from "./quartz-custom/plugins";
 
 /**
  * Quartz 4.0 Configuration
@@ -75,7 +75,8 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest", openLinksInNewTab: true }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      RemoveTags({ tags: ["publish", "almanac"] }),
+      CustomPlugins.RemoveTags({ tags: ["publish", "almanac"] }),
+      CustomPlugins.Img(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
@@ -92,7 +93,7 @@ const config: QuartzConfig = {
       }),
       Plugin.Assets(),
       Plugin.Static(),
-      Plugin.NotFoundPage(),
+      Plugin.NotFoundPage()
     ],
   },
 }
