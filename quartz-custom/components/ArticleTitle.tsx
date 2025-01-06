@@ -8,7 +8,7 @@ const ArticleTitle: QuartzComponent = (props: QuartzComponentProps) => {
   const title = fileData.frontmatter?.title
   const hideTitle = fileData.frontmatter?.["hide-title"]
   if (title && !hideTitle) {
-    return <OGArticleTitle {...props}/>
+    return OGArticleTitle()(props)
   } else {
     return null
   }

@@ -7,12 +7,10 @@ interface ContentMetaOptions {
 }
 
 export default ((opts?: Partial<ContentMetaOptions>) => {
-  function ContentMetadata({ fileData }: QuartzComponentProps) {
-    const hideMeta = fileData.frontmatter?.["hide-meta"]
-    const text = fileData.text
-
-    if (text && !hideMeta) {
-      return <OGContentMetadata {...opts} />
+  function ContentMetadata(props: QuartzComponentProps) {
+    const hideMeta = props.fileData.frontmatter?.["hide-meta"]
+    if (!hideMeta) {
+      return OGContentMetadata(opts)(props)
     } else {
       return null
     }
