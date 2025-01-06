@@ -93,6 +93,7 @@ const config: QuartzConfig = {
       }),
       Plugin.Assets(),
       Plugin.Static(),
+      CustomPlugins.Static(),
       Plugin.NotFoundPage()
     ],
   },
