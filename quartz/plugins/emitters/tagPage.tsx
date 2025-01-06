@@ -104,7 +104,7 @@ export const TagPage: QuartzEmitterPlugin<Partial<TagPageOptions>> = (userOpts) 
         if (slug.startsWith("tags/")) {
           const tag = slug.slice("tags/".length)
           if (tags.has(tag)) {
-if (file.data.frontmatter?.title === tag) {
+            if (file.data.frontmatter?.title === tag) {
               file.data.frontmatter.title = `${i18n(cfg.locale).pages.tagContent.tag}: ${tag}`
             }
           }
