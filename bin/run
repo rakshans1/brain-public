@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+run_deps() {
+  npm i
+}
+
+run_serve() {
+  npx quartz create
+}
+
+run_build() {
+  npx quartz build
+}
+
+run_sync() {
+  export BRAIN_VAULT="~/Documents/brain/notes"
+  export BRAIN_PUBLIC_VAULT="~/projects/node/brain-public/content"
+  node utils/content-sync/index.js 
+}
+
+run_publish() {
+  cd content && git add . && git commit -m "Update" && git push
+  cd ..
+  git add . && git commit -m "Update content" && git push
+}
+
+run_deploy() {
+  run sync
+  run build
+  run publish
+}
+
+fn_exists() { declare -F "$1" >/dev/null; }
+
+run() {
+  local cmd=$1
+  shift
+  local fn="run_$cmd"
+
+  if fn_exists $fn; then
+    $fn ${@}
+  else
+    with_dev_env
+    eval $cmd "${@}"
+  fi
+}
+
+
+run ${@}
