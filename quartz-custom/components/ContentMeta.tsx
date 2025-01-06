@@ -1,5 +1,6 @@
 import  OGContentMetadata from "../../quartz/components/ContentMeta"
 import { QuartzComponentConstructor, QuartzComponentProps } from "../../quartz/components/types"
+import style from "../../quartz/components/styles/contentMeta.scss"
 
 interface ContentMetaOptions {
   showReadingTime: boolean
@@ -15,6 +16,8 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
       return null
     }
   }
+
+  ContentMetadata.css = style
 
   return ContentMetadata
 }) satisfies QuartzComponentConstructor
