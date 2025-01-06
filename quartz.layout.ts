@@ -2,6 +2,7 @@ import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import { notesFilter } from "./quartz-custom/utils/filter"
 import { topicFilter } from "./quartz-custom/utils/filter"
+import * as CustomComponent from "./quartz-custom/components"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -23,8 +24,8 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.Breadcrumbs(),
-    Component.ArticleTitle(),
-    Component.ContentMeta(),
+    CustomComponent.ArticleTitle(),
+    CustomComponent.ContentMeta(),
     Component.TagList(),
   ],
   left: [

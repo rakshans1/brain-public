@@ -24,10 +24,9 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
   const options: ContentMetaOptions = { ...defaultOptions, ...opts }
 
   function ContentMetadata({ cfg, fileData, displayClass }: QuartzComponentProps) {
-    const hideMeta = fileData.frontmatter?.["hide-meta"]
     const text = fileData.text
 
-    if (text && !hideMeta) {
+    if (text) {
       const segments: (string | JSX.Element)[] = []
 
       if (fileData.dates) {
