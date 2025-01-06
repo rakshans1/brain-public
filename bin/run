@@ -17,7 +17,7 @@ run_build() {
 run_sync() {
   export BRAIN_VAULT="~/Documents/brain/notes"
   export BRAIN_PUBLIC_VAULT="~/projects/node/brain-public/content"
-  node utils/content-sync/index.js 
+  node utils/content-sync/index.js
 }
 
 run_publish() {
@@ -30,6 +30,13 @@ run_deploy() {
   run sync
   run build
   run publish
+}
+
+run_quartz_update() {
+  cp -r ../quartz/quartz/* quartz
+  cp -r ../quartz/package.json package.json
+  cp -r ../quartz/tsconfig.json tsconfig.json
+  cp -r ../quartz/package-lock.json package-lock.json
 }
 
 fn_exists() { declare -F "$1" >/dev/null; }
