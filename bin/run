@@ -32,7 +32,7 @@ run_deploy() {
   run publish
 }
 
-run_quartz_update() {
+run_quartz.update() {
   cp -r ../quartz/quartz/* quartz
   cp -r ../quartz/package.json package.json
   cp -r ../quartz/tsconfig.json tsconfig.json

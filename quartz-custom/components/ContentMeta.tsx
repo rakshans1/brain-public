@@ -17,7 +17,7 @@ const defaultOptions: ContentMetaOptions = {
 }
 
 function formatReadingTime(minutes: number) {
-  let cups = Math.round(minutes / 5)
+  let cups = Math.round(minutes / 3)
   if (cups > 5) {
     return `${new Array(Math.round(cups / Math.E))
       .fill("🍱")

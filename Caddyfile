@@ -1,0 +1,11 @@
+brain.localhost {
+  root * {env.HOME}/projects/node/brain-public/public
+  try_files {path} {path}.html {path}/ =404
+  encode gzip
+  file_server
+
+  handle_errors {
+        rewrite * /{err.status_code}.html
+        file_server
+    }
+}
