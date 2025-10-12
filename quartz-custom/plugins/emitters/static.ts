@@ -1,38 +1,27 @@
-
-import fs from "fs"
-import { QUARTZ, joinSegments } from "../../../quartz/util/path"
-import { QuartzEmitterPlugin } from "../../../quartz/plugins/types"
-import { FilePath } from "../../../quartz/util/path"
-import DepGraph from "../../../quartz/depgraph"
-import { glob } from "../../../quartz/util/glob"
-import { QUARTZ_CUSTOM } from "../../utils/path"
+import fs from "fs";
+import { FilePath, joinSegments } from "../../../quartz/util/path";
+import { QuartzEmitterPlugin } from "../../../quartz/plugins/types";
+import { glob } from "../../../quartz/util/glob";
+import { QUARTZ_CUSTOM } from "../../utils/path";
+import { dirname } from "path";
 
 export const Static: QuartzEmitterPlugin = () => ({
-  name: "CustomStatic",
-  getQuartzComponents() {
-    return []
-  },
-  async getDependencyGraph({ argv, cfg }, _content, _resources) {
-    const graph = new DepGraph<FilePath>()
+	name: "CustomStatic",
+	async *emit({ argv, cfg }) {
+		// Small delay to ensure built-in Static plugin completes first
+		await new Promise((resolve) => setTimeout(resolve, 100));
 
-    const staticPath = joinSegments(QUARTZ_CUSTOM, "static")
-    const fps = await glob("**", staticPath, cfg.configuration.ignorePatterns)
-    for (const fp of fps) {
-      graph.addEdge(
-        joinSegments("static", fp) as FilePath,
-        joinSegments(argv.output, "static", fp) as FilePath,
-      )
-    }
-
-    return graph
-  },
-  async emit({ argv, cfg }, _content, _resources): Promise<FilePath[]> {
-    const staticPath = joinSegments(QUARTZ_CUSTOM, "static")
-    const fps = await glob("**", staticPath, cfg.configuration.ignorePatterns)
-    await fs.promises.cp(staticPath, joinSegments(argv.output, "static"), {
-      recursive: true,
-      dereference: true,
-    })
-    return fps.map((fp) => joinSegments(argv.output, "static", fp)) as FilePath[]
-  },
-})
+		const staticPath = joinSegments(QUARTZ_CUSTOM, "static");
+		const fps = await glob("**", staticPath, cfg.configuration.ignorePatterns);
+		const outputStaticPath = joinSegments(argv.output, "static");
+		await fs.promises.mkdir(outputStaticPath, { recursive: true });
+		for (const fp of fps) {
+			const src = joinSegments(staticPath, fp) as FilePath;
+			const dest = joinSegments(outputStaticPath, fp) as FilePath;
+			await fs.promises.mkdir(dirname(dest), { recursive: true });
+			await fs.promises.copyFile(src, dest);
+			yield dest;
+		}
+	},
+	async *partialEmit() {},
+});
