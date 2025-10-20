@@ -18,7 +18,7 @@ const expandTilde = (filePath) => {
 const config = {
     brainVault: expandTilde(process.env.BRAIN_VAULT),
     brainPublicContent: expandTilde(process.env.BRAIN_PUBLIC_VAULT),
-    publishTag: 'publish'
+    publishTag: 'brain'
 };
 
 class ObsidianSync {

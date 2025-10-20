@@ -77,7 +77,7 @@ const config: QuartzConfig = {
 			}),
 			Plugin.Description(),
 			Plugin.Latex({ renderEngine: "katex" }),
-			CustomPlugins.RemoveTags({ tags: ["publish", "almanac"] }),
+			CustomPlugins.RemoveTags({ tags: ["brain", "almanac"] }),
 			CustomPlugins.Img(),
 		],
 		filters: [Plugin.RemoveDrafts()],
