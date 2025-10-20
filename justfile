@@ -2,9 +2,9 @@
 deps:
     npm i
 
-# Initialize Quartz site
-serve:
-    npx quartz create
+# Development server with auto-rebuild
+dev:
+  npx quartz build --serve
 
 # Build the Quartz site
 build:
