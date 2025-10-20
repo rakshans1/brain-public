@@ -21,7 +21,6 @@ const config: QuartzConfig = {
 		baseUrl: "brain.rakshanshetty.in",
 		ignorePatterns: ["private", "templates", ".obsidian"],
 		defaultDateType: "created",
-		generateSocialImages: false,
 		theme: {
 			fontOrigin: "googleFonts",
 			cdnCaching: true,

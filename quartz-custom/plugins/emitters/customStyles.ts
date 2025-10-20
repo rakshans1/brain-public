@@ -33,5 +33,14 @@ export const CustomStyles: QuartzEmitterPlugin = () => {
       })
     },
     async *partialEmit() {},
+    externalResources: () => {
+      return {
+        css: [
+          {
+            content: "/custom.css",
+          },
+        ],
+      }
+    },
   }
 }

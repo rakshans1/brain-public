@@ -3,8 +3,8 @@ deps:
     npm i
 
 # Development server with auto-rebuild
-dev:
-  npx quartz build --serve
+serve:
+  npx quartz build --serve --port 9021 --wsPort 9921
 
 # Build the Quartz site
 build:
