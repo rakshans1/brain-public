@@ -23,11 +23,22 @@ export const sharedPageComponents: SharedLayout = {
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
+    CustomComponent.CoverImage(),
     Component.Breadcrumbs({
       showCurrentPage: false,
     }),
-    CustomComponent.ArticleTitle(),
-    CustomComponent.ContentMeta(),
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: (props) => {
+        const title = props.fileData.frontmatter?.title
+        const hideTitle = props.fileData.frontmatter?.["hide-title"]
+        return !!(title && !hideTitle)
+      }
+    }),
+    Component.ConditionalRender({
+      component: CustomComponent.ContentMeta(),
+      condition: (props) => !props.fileData.frontmatter?.["hide-meta"]
+    }),
     Component.TagList(),
   ],
   left: [
@@ -51,8 +62,18 @@ export const defaultContentPageLayout: PageLayout = {
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [
     Component.Breadcrumbs(),
-    CustomComponent.ArticleTitle(),
-    CustomComponent.ContentMeta(),
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: (props) => {
+        const title = props.fileData.frontmatter?.title
+        const hideTitle = props.fileData.frontmatter?.["hide-title"]
+        return !!(title && !hideTitle)
+      }
+    }),
+    Component.ConditionalRender({
+      component: CustomComponent.ContentMeta(),
+      condition: (props) => !props.fileData.frontmatter?.["hide-meta"]
+    }),
   ],
   left: [
     Component.PageTitle(),

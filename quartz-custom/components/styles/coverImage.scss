@@ -1,0 +1,34 @@
+.cover-image-container {
+  width: 100%;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+
+  // Break out of content container for full-width display
+  // This ensures the image spans the full viewport width
+  // Note: This technique requires parent containers NOT to have overflow: hidden
+  // If full-width doesn't work, check parent .center and .page-header CSS
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: 100vw;
+
+  .cover-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0; // No border radius for full-width images
+  }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+  .cover-image-container {
+    margin-bottom: 1rem;
+
+    .cover-image {
+      max-height: 300px; // Slightly shorter on mobile
+    }
+  }
+}
